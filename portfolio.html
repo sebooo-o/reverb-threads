@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
-        <a href="index.html" class="logo">REVERB THREADS</a>
+        <a href="index.html">
+            <img src="logo.png" alt="Reverb Threads Logo" class="logo-img">
+        </a>
         <nav>
             <a href="index.html">Home</a>
-            <a href="portfolio.html" style="color: var(--accent-orange);">The Stash</a>
+            <a href="portfolio.html" style="color: var(--color-burnt-brown);">The Stash</a>
             <a href="contact.html">Signal</a>
         </nav>
     </header>
@@ -20,29 +21,18 @@
     <div class="container">
         <h2>Current Collection</h2>
         <p>Unique 1-of-1 items sourced from Slovak thrift shops.</p>
-
-        <!-- THIS IS THE EMPTY CONTAINER WHERE JS PUTS YOUR ITEMS -->
         <div class="gallery" id="stash-container">
-            <!-- JavaScript will insert items here automatically -->
-        </div>
-
+            </div>
     </div>
 
     <footer>
         &copy; 2025 Reverb Threads. Trnava, Slovakia.
     </footer>
 
-    <!-- LINK TO YOUR DATA FILE -->
     <script src="projects.js"></script>
-
-    <!-- THE MAGIC SCRIPT THAT SHOWS THE ITEMS -->
     <script>
         const container = document.getElementById('stash-container');
-
-        // This loops through your list in projects.js
         projectData.forEach(item => {
-            
-            // This creates the HTML for one item
             const html = `
                 <div class="item">
                     <div class="img-wrapper" style="position: relative;">
@@ -51,15 +41,12 @@
                     </div>
                     <h3>${item.title}</h3>
                     <p>${item.description}</p>
-                    <p style="font-weight: bold; color: var(--accent-orange);">${item.price}</p>
+                    <p style="font-weight: bold; color: var(--color-burnt-brown);">${item.price}</p>
                     ${item.status !== 'SOLD' ? '<a href="contact.html" style="font-size: 0.8rem; text-decoration: underline; color: black;">I want this</a>' : ''}
                 </div>
             `;
-
-            // This adds it to the page
             container.innerHTML += html;
         });
     </script>
-
 </body>
 </html>
