@@ -2,22 +2,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Shrikhand&family=Courier+Prime:wght@400;700&display=swap');
 
 :root {
-    /* THE VINTAGE SETLIST PALETTE */
-    --bg-color: #F0EAD6;       /* Eggshell / Old Paper */
-    --text-color: #333333;     /* Faded Black */
-    --brand-rust: #8D4E2F;     /* MATCHES YOUR LOGO (Leather/Rust) */
-    --accent-psych: #6C3483;   /* Deep Purple (Hendrix Vibe) */
-    --accent-olive: #556B2F;   /* Army Green (Surplus Vibe) */
+    /* THE VINTAGE SETLIST PALETTE (OFFICIAL) */
+    --color-vintage-cream: #F7EEDD;       /* Background: Vintage Cream (Old Paper) */
+    --color-text-dark: #333333;           /* Text: Faded Black */
+    --color-burnt-brown: #824538;         /* Brand Primary: Official Burnt Brown */
+    --color-faded-teak: #5B8A8A;          /* Accent 1: Official Faded Teak (Psychedelic Pop) */
+    --color-golden-ochre: #E0B34B;        /* Accent 2: Official Golden Ochre (Earth Tone) */
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Courier Prime', monospace; /* Typewriter font */
+    background-color: var(--color-vintage-cream);
+    color: var(--color-text-dark);
+    font-family: 'Courier Prime', monospace;
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    background-image: radial-gradient(#dcd6c5 1px, transparent 1px); /* Subtle paper grain texture */
+    background-image: radial-gradient(#efe9e0 1px, transparent 1px);
     background-size: 20px 20px;
 }
 
@@ -25,13 +25,12 @@ body {
 header {
     text-align: center;
     padding: 30px 20px;
-    border-bottom: 4px double var(--brand-rust); /* Double line looks like denim stitching */
-    background: white; /* Makes the logo pop */
+    border-bottom: 4px double var(--color-burnt-brown);
+    background: white;
 }
 
-/* LOGO IMAGE STYLING */
 .logo-img {
-    max-width: 250px; /* Controls logo size */
+    max-width: 250px;
     height: auto;
     display: block;
     margin: 0 auto 20px auto;
@@ -39,14 +38,14 @@ header {
 }
 
 .logo-img:hover {
-    transform: rotate(-2deg) scale(1.05); /* Slight rock n roll tilt on hover */
+    transform: rotate(-2deg) scale(1.05);
 }
 
 h1, h2, h3 {
-    font-family: 'Shrikhand', cursive; 
+    font-family: 'Shrikhand', cursive;
     text-transform: uppercase;
     margin: 0;
-    color: var(--brand-rust);
+    color: var(--color-burnt-brown);
     letter-spacing: 1px;
 }
 
@@ -57,7 +56,7 @@ nav {
 nav a {
     margin: 0 10px;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--color-text-dark);
     font-weight: bold;
     font-size: 1.1rem;
     text-transform: uppercase;
@@ -66,8 +65,8 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--accent-psych);
-    border-bottom: 2px dashed var(--accent-psych);
+    color: var(--color-faded-teak);
+    border-bottom: 2px dashed var(--color-faded-teak);
 }
 
 /* 3. LAYOUT */
@@ -78,24 +77,24 @@ nav a:hover {
     text-align: center;
 }
 
-/* 4. BUTTONS (The "Patch" Look) */
+/* 4. BUTTONS */
 .btn {
     display: inline-block;
-    background-color: var(--brand-rust);
+    background-color: var(--color-burnt-brown);
     color: white;
     padding: 15px 35px;
     text-decoration: none;
     font-weight: bold;
     margin-top: 25px;
-    border-radius: 50px; /* Rounded pill shape */
+    border-radius: 50px;
     transition: 0.3s;
-    border: 2px solid var(--brand-rust);
+    border: 2px solid var(--color-burnt-brown);
 }
 
 .btn:hover {
     background-color: transparent;
-    color: var(--brand-rust);
-    box-shadow: 0px 0px 15px rgba(141, 78, 47, 0.4);
+    color: var(--color-burnt-brown);
+    box-shadow: 0px 0px 15px rgba(130, 69, 56, 0.4);
 }
 
 /* 5. PORTFOLIO GRID */
@@ -107,22 +106,22 @@ nav a:hover {
 }
 
 .item {
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--color-text-dark);
     padding: 15px;
     background: white;
-    box-shadow: 8px 8px 0px var(--text-color); /* Hard retro shadow */
+    box-shadow: 8px 8px 0px var(--color-text-dark);
     transition: 0.3s;
 }
 
 .item:hover {
     transform: translateY(-5px);
-    box-shadow: 12px 12px 0px var(--accent-psych);
+    box-shadow: 12px 12px 0px var(--color-faded-teak);
 }
 
 .item img {
     width: 100%;
     height: auto;
-    filter: sepia(30%) contrast(110%); /* Adds a vintage film look to photos automatically */
+    filter: sepia(30%) contrast(110%);
 }
 
 /* 6. FOOTER */
@@ -131,6 +130,6 @@ footer {
     padding: 40px;
     font-size: 0.8rem;
     margin-top: 60px;
-    background-color: var(--text-color);
-    color: var(--bg-color);
+    background-color: var(--color-text-dark);
+    color: var(--color-vintage-cream);
 }
