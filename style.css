@@ -1,11 +1,11 @@
 /* 1. IMPORTS & BASICS */
-
-/* Removed Google Font import for 'Shrikhand' and 'Pacifico'. */
+/* Courier Prime remains for body text */
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 
 /* --- Custom Font Implementation for Reverb Threads --- */
+/* Links the uploaded .otf file to the brand's font name 'Beach Vibes' */
 @font-face {
-    font-family: 'Beach Vibes'; /* Using your brand name for the CSS font-family */
+    font-family: 'Beach Vibes'; 
     src: url('fonts/BeachFlower.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
@@ -19,6 +19,7 @@
     --color-burnt-brown: #824538;         /* Brand Primary: Official Burnt Brown */
     --color-faded-teak: #5B8A8A;          /* Accent 1: Official Faded Teak (Psychedelic Pop) */
     --color-golden-ochre: #E0B34B;        /* Accent 2: Official Golden Ochre (Earth Tone) */
+    --color-dusty-rose: #C79A32;          /* Secondary Brand Color */ /* Pridana pre uplnost, zatial nepouzita v dizajne */
 }
 
 body {
@@ -28,9 +29,28 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    background-image: radial-gradient(#efe9e0 1px, transparent 1px);
-    background-size: 20px 20px;
+    /* UPRAVENÉ: Organické vlny ako pozadie */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f7eedd' fill-opacity='1' d='M0,192L40,181.3C80,171,160,149,240,138.7C320,128,400,128,480,149.3C560,171,640,213,720,208C800,203,880,155,960,149.3C1040,144,1120,181,1200,181.3C1280,181,1360,149,1400,133.3L1440,117L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%23e0b34b' fill-opacity='0.4' d='M0,128L40,117.3C80,107,160,85,240,74.7C320,64,400,64,480,85.3C560,107,640,149,720,165.3C800,181,880,171,960,149.3C1040,128,1120,96,1200,96C1280,96,1360,128,1400,144L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%235b8a8a' fill-opacity='0.2' d='M0,64L40,80C80,96,160,128,240,133.3C320,139,400,117,480,117.3C560,117,640,139,720,128C800,117,880,75,960,69.3C1040,64,1120,85,1200,90.7C1280,96,1360,85,1400,80L1440,75L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: cover; /* Pokrytie celej plochy */
+    background-attachment: fixed; /* Ak chcete, aby sa vlny nepohybovali pri scrollovaní */
+    background-position: center bottom; /* Pozicionovanie vĺn */
+    position: relative; /* Pre umiestnenie overlayu */
 }
+
+/* NOVÝ: Zrnitý overlay pre retro vzhľad */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAMAAABl+v1SAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZQTFRFzsvM+/f3///+t7zDgoKCKysqAAAAf4iY3wAAAAxJREFUeNpiYGBgAAADAAAABQANrJqQAAAAAElFTkSuQmCC'); /* Jemná zrnitá textúra */
+    opacity: 0.2; /* Nízka transparentnosť */
+    pointer-events: none; /* Aby neprekážal interakciám */
+    z-index: 1000; /* Prekrytie všetkého */
+}
+
 
 /* 2. HEADER & NAVIGATION */
 header {
@@ -38,18 +58,20 @@ header {
     padding: 40px 20px;
     border-bottom: 4px double var(--color-burnt-brown);
     background: white;
+    position: relative; /* Zabezpečí, že header bude nad zrnitým overlayom */
+    z-index: 1001;
 }
 
 /* Styles for the text logo */
 .brand-text-logo {
-    /* 🎸 CHANGE 1: Using custom 'Beach Vibes' font */
+    /* 🎸 Uses the custom 'Beach Vibes' font */
     font-family: 'Beach Vibes', cursive;
-    /* Font size remains big */
+    /* Set to a size bigger than body text */
     font-size: 3.5rem;
     color: var(--color-burnt-brown);
     text-decoration: none;
     display: inline-flex;
-    align-items: center;
+    align-items: center; /* Ensures the text and symbol are vertically centered */
     margin-bottom: 10px;
     letter-spacing: 0;
     transition: color 0.3s;
@@ -60,10 +82,10 @@ header {
 }
 
 .logo-symbol {
-    /* Height matches the text size (3.5rem) */
+    /* Set height to match the text size (3.5rem) as requested */
     height: 3.5rem;
     width: auto;
-    margin-left: 10px;
+    margin-left: 10px; /* Positions the symbol on the right */
     transition: transform 0.3s;
 }
 
@@ -97,6 +119,8 @@ nav a:hover {
     margin: 0 auto;
     padding: 50px 20px;
     text-align: center;
+    position: relative; /* Zabezpečí, že obsah bude nad zrnitým overlayom */
+    z-index: 1001;
 }
 
 /* 4. BUTTONS */
@@ -133,6 +157,11 @@ nav a:hover {
     background: white;
     box-shadow: 8px 8px 0px var(--color-text-dark);
     transition: 0.3s;
+    /* NOVÝ: Organické rohy pre galériu */
+    border-radius: 15px 40px 15px 40px / 40px 15px 40px 15px; /* Asymetrické zaoblenie */
+    clip-path: polygon(
+        5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%
+    ); /* Jemné organické "preliačenie" */
 }
 
 .item:hover {
@@ -154,4 +183,15 @@ footer {
     margin-top: 60px;
     background-color: var(--color-text-dark);
     color: var(--color-vintage-cream);
+    position: relative; /* Zabezpečí, že footer bude nad zrnitým overlayom */
+    z-index: 1001;
+}
+
+/* NOVÝ: Styling pre kontaktný box, aby mal rovnaké organické rohy */
+.container > div:has(p strong) { /* Targetuje box s kontaktnými informáciami */
+    /* Rovnaké organické rohy ako .item */
+    border-radius: 15px 40px 15px 40px / 40px 15px 40px 15px; 
+    clip-path: polygon(
+        5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%
+    );
 }
