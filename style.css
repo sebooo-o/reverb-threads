@@ -30,7 +30,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    /* AKTUALIZOVANÉ: Hustejšie a menšie vlny */
+    /* AKTUALIZOVANÉ: Hustejšie a menšie vlny (stabilná verzia) */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f7eedd' fill-opacity='1' d='M0,160L40,149.3C80,139,160,117,240,112C320,107,400,112,480,149.3C560,187,640,256,720,240C800,224,880,128,960,106.7C1040,85,1120,139,1200,144C1280,149,1360,107,1400,85.3L1440,64L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%23e0b34b' fill-opacity='0.4' d='M0,192L40,181.3C80,171,160,149,240,138.7C320,128,400,128,480,149.3C560,171,640,213,720,208C800,203,880,155,960,149.3C1040,144,1120,181,1200,181.3C1280,181,1360,149,1400,133.3L1440,117L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%235b8a8a' fill-opacity='0.2' d='M0,192L40,176C80,160,160,128,240,133.3C320,139,400,187,480,208C560,229,640,229,720,208C800,187,880,149,960,128C1040,107,1120,107,1200,112C1280,117,1360,128,1400,133.3L1440,139L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); 
     background-size: cover;
     background-attachment: fixed;
@@ -38,15 +38,22 @@ body {
     position: relative;
 }
 
-/* ... (zvyšok CSS je nezmenený okrem sekcie NAV) */
-
-/* 2. HEADER & NAVIGATION */
-/* ... (nemenné) ... */
-
-nav {
-    margin-top: 20px;
+/* Zrnitý overlay (pôvodné opacity 0.4) */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAMAAABl+v1SAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZQTFRFzsvM+/f3///+t7zDgoKCKysqAAAAf4iY3wAAAAxJَع]eNpiYGBgAAADAAAABQANrJqQAAAAAElFTkSuQmCC'); 
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 1000;
 }
 
+/* 2. HEADER & NAVIGATION */
+/* Zabezpečenie responzivity pre 4 položky v nav */
 nav a {
     margin: 0 10px; /* Zmenšený margin pre 4 položky */
     text-decoration: none;
@@ -58,8 +65,40 @@ nav a {
     transition: 0.3s;
 }
 
-nav a:hover {
-    color: var(--color-faded-teak);
-    border-bottom: 2px dashed var(--color-faded-teak);
+/* Media Query pre stabilné rozloženie na mobiloch */
+@media (max-width: 600px) {
+    .brand-text-logo {
+        font-size: 2.5rem; 
+        margin-bottom: 5px;
+    }
+    .logo-symbol {
+        height: 2.5rem;
+    }
+    nav {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center;
+    }
+    nav a {
+        margin: 5px 8px;
+        font-size: 0.9rem;
+    }
+    .container {
+        padding: 30px 15px;
+    }
 }
-/* ... (zvyšok CSS je nezmenený) ... */
+
+
+/* ... (Zvyšok CSS je rovnaký ako v stabilnej verzii) ... */
+
+/* 5. PORTFOLIO GRID */
+.item {
+    border: 1px solid var(--color-text-dark);
+    padding: 15px;
+    background: white;
+    box-shadow: 8px 8px 0px var(--color-text-dark);
+    transition: 0.3s;
+    border-radius: 0; 
+    clip-path: none; 
+}
+/* ... (atď.) ... */
