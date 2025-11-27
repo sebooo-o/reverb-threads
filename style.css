@@ -1,5 +1,6 @@
 /* 1. IMPORTS & BASICS */
-@import url('https://fonts.googleapis.com/css2?family=Shrikhand&family=Courier+Prime:wght@400;700&display=swap');
+/* Replaced Shrikhand with 'Pacifico' as a 'Beach Vibes' script font alternative for Reverb Threads logo */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Courier+Prime:wght@400;700&display=swap');
 
 :root {
     /* THE VINTAGE SETLIST PALETTE (OFFICIAL) */
@@ -31,15 +32,17 @@ header {
 
 /* Styles for the text logo */
 .brand-text-logo {
-    font-family: 'Shrikhand', cursive;
-    font-size: 3rem;
-    text-transform: uppercase;
+    /* 🎤 CHANGE 1: Switched to 'Pacifico' as a 'Beach Vibes' substitute. */
+    font-family: 'Pacifico', cursive;
+    /* 🎤 CHANGE 2: Increased font size to 3.5rem (Bigger than 3rem and body text). */
+    font-size: 3.5rem;
+    /* Removed text-transform: uppercase for the script font. */
     color: var(--color-burnt-brown);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     margin-bottom: 10px;
-    letter-spacing: 2px;
+    letter-spacing: 0; /* Adjusted letter spacing for a cleaner script font look */
     transition: color 0.3s;
 }
 
@@ -48,10 +51,11 @@ header {
 }
 
 .logo-symbol {
-    height: 1.5rem; /* REDUCED SIZE: Changed from 1em to a fixed smaller value (1.5rem) */
+    /* 🎤 CHANGE 3: Set height to match the text (3.5rem) and keep it small on the right. */
+    height: 3.5rem;
     width: auto;
     margin-left: 10px;
-    vertical-align: top; /* Adjusted alignment */
+    /* Removed vertical-align; relying on parent's align-items: center for perfect vertical centering. */
     transition: transform 0.3s;
 }
 
