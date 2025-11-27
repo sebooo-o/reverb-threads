@@ -1,6 +1,16 @@
 /* 1. IMPORTS & BASICS */
-/* Replaced Shrikhand with 'Pacifico' as a 'Beach Vibes' script font alternative for Reverb Threads logo */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Courier+Prime:wght@400;700&display=swap');
+
+/* Removed Google Font import for 'Shrikhand' and 'Pacifico'. */
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+/* --- Custom Font Implementation for Reverb Threads --- */
+@font-face {
+    font-family: 'Beach Vibes'; /* Using your brand name for the CSS font-family */
+    src: url('fonts/BeachFlower.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+/* ---------------------------------------------------- */
 
 :root {
     /* THE VINTAGE SETLIST PALETTE (OFFICIAL) */
@@ -32,17 +42,16 @@ header {
 
 /* Styles for the text logo */
 .brand-text-logo {
-    /* 🎤 CHANGE 1: Switched to 'Pacifico' as a 'Beach Vibes' substitute. */
-    font-family: 'Pacifico', cursive;
-    /* 🎤 CHANGE 2: Increased font size to 3.5rem (Bigger than 3rem and body text). */
+    /* 🎸 CHANGE 1: Using custom 'Beach Vibes' font */
+    font-family: 'Beach Vibes', cursive;
+    /* Font size remains big */
     font-size: 3.5rem;
-    /* Removed text-transform: uppercase for the script font. */
     color: var(--color-burnt-brown);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     margin-bottom: 10px;
-    letter-spacing: 0; /* Adjusted letter spacing for a cleaner script font look */
+    letter-spacing: 0;
     transition: color 0.3s;
 }
 
@@ -51,11 +60,10 @@ header {
 }
 
 .logo-symbol {
-    /* 🎤 CHANGE 3: Set height to match the text (3.5rem) and keep it small on the right. */
+    /* Height matches the text size (3.5rem) */
     height: 3.5rem;
     width: auto;
     margin-left: 10px;
-    /* Removed vertical-align; relying on parent's align-items: center for perfect vertical centering. */
     transition: transform 0.3s;
 }
 
