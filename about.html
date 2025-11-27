@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Príbeh | Reverb Threads</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Lokálne štýly pre about.html */
+        .story-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            text-align: left;
+            margin-top: 40px;
+        }
+        .story-image {
+            max-width: 100%;
+            height: auto;
+            border: 4px solid var(--color-burnt-brown);
+            box-shadow: 15px 15px 0px var(--color-faded-teak);
+            filter: sepia(30%) contrast(110%);
+        }
+        .story-highlight {
+            font-family: 'Beach Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--color-golden-ochre);
+            text-align: center;
+            margin: 40px 0;
+            line-height: 1;
+        }
+        .text-block {
+            padding: 20px;
+            background: white;
+            border: 1px solid var(--color-text-dark);
+            box-shadow: 5px 5px 0px var(--color-text-dark);
+        }
+        @media (min-width: 768px) {
+            .story-layout {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+            .image-right {
+                order: 2; /* Obrázok napravo */
+            }
+            .text-right {
+                order: 1; /* Text naľavo */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="brand-text-logo">
+            REVERB THREADS 
+            <img src="assets/logoSymbol.png" alt="Reverb Threads Logo Symbol" class="logo-symbol">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html" style="color: var(--color-burnt-brown);">Príbeh</a> <a href="portfolio.html">The Stash</a>
+            <a href="contact.html">Signal</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Príbeh Reverb Threads</h2>
+        <p class="story-highlight">
+            ODHLASUJ SA, NALAĎ SA, PREŠI SA.
+        </p>
+        
+        <div class="story-layout">
+            <div class="text-block">
+                <h3>Všetko začína v Bratislave (alebo Trnave?)</h3>
+                <p>
+                    [SEM PRÍDE VÁŠ ÚVODNÝ TEXT O ZNAČKE A FILOZOFII]
+                    <br><br>
+                    Našou filozofiou nie je len tvoriť, ale redefinovať, čo znamená mať štýl. V čase masovej výroby prinášame späť silu 1-of-1 kúskov. Každý steh je spomienka, každý kus látky má za sebou históriu.
+                </p>
+            </div>
+            <div>
+                <img src="assets/RTlogo.png" alt="Obrázok Vintage Tlače (DOPLNIŤ SPRÁVNU CESTU)" class="story-image">
+                <p style="text-align: center; font-size: 0.8rem; margin-top: 10px;">Detail prvej upcyklovanej bundy.</p>
+            </div>
+        </div>
+
+        <div class="story-layout" style="margin-top: 80px;">
+            <div class="image-right">
+                <img src="assets/RTlogo.png" alt="Obrázok Šijacieho Stroja Singer (DOPLNIŤ SPRÁVNU CESTU)" class="story-image">
+                <p style="text-align: center; font-size: 0.8rem; margin-top: 10px;">Naše srdce: Singer 4432.</p>
+            </div>
+            <div class="text-block text-right">
+                <h3>Pohonný motor: Singer 4432</h3>
+                <p>
+                    [SEM PRÍDE TEXT O STROJI A REMESLE]
+                    <br><br>
+                    Žiadne priemyselné stroje. Každý náš kúsok prešiel robustným, no verným šijacím strojom Singer 4432. Táto práca na mieru zaručuje, že kvalita je rovnako dôležitá ako príbeh, ktorý kúsok nesie. Nečakajte továrenskú dokonalosť, očakávajte **dokonalosť duše**.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Reverb Threads. Trnava, Slovakia.
+    </footer>
+</body>
+</html>
