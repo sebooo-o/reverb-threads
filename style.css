@@ -1,6 +1,6 @@
 /* 1. IMPORTS & BASICS */
-/* Fira Code - Nový minimalistický/technický font pre telo a nadpisy */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&display=swap');
+/* Courier Prime - Pôvodný font */
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
 
 /* --- Custom Font Implementation for Reverb Threads --- */
 @font-face {
@@ -24,21 +24,19 @@
 body {
     background-color: var(--color-vintage-cream);
     color: var(--color-text-dark);
-    /* NOVÝ FONT: Fira Code */
-    font-family: 'Fira Code', monospace; 
-    font-weight: 300;
+    font-family: 'Courier Prime', monospace; 
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    /* AKTUALIZOVANÉ: Hustejšie a menšie vlny (stabilná verzia) */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f7eedd' fill-opacity='1' d='M0,160L40,149.3C80,139,160,117,240,112C320,107,400,112,480,149.3C560,187,640,256,720,240C800,224,880,128,960,106.7C1040,85,1120,139,1200,144C1280,149,1360,107,1400,85.3L1440,64L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%23e0b34b' fill-opacity='0.4' d='M0,192L40,181.3C80,171,160,149,240,138.7C320,128,400,128,480,149.3C560,171,640,213,720,208C800,203,880,155,960,149.3C1040,144,1120,181,1200,181.3C1280,181,1360,149,1400,133.3L1440,117L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z'%3E%3C/path%3E%3Cpath fill='%235b8a8a' fill-opacity='0.2' d='M0,192L40,176C80,160,160,128,240,133.3C320,139,400,187,480,208C560,229,640,229,720,208C800,187,880,149,960,128C1040,107,1120,107,1200,112C1280,117,1360,128,1400,133.3L1440,139L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z'%3E%3C/path%3E%3C/svg%3E"); 
+    /* Pôvodné Psychedelic vlny */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f7eedd' fill-opacity='1' d='M0,192L40,181.3C80,171,160,149,240,138.7C320,128,400,128,480,149.3C560,171,640,213,720,208C800,203,880,155,960,149.3C1040,144,1120,181,1200,181.3C1280,181,1360,149,1400,133.3L1440,117L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%23e0b34b' fill-opacity='0.4' d='M0,128L40,117.3C80,107,160,85,240,74.7C320,64,400,64,480,85.3C560,107,640,149,720,165.3C800,181,880,171,960,149.3C1040,128,1120,96,1200,96C1280,96,1360,128,1400,144L1440,160L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'%3E%3C/path%3E%3Cpath fill='%235b8a8a' fill-opacity='0.2' d='M0,64L40,80C80,96,160,128,240,133.3C320,139,400,117,480,117.3C560,117,640,139,720,128C800,117,880,75,960,69.3C1040,64,1120,85,1200,90.7C1280,96,1360,85,1400,80L1440,75L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
     background-size: cover;
     background-attachment: fixed;
     background-position: center bottom;
     position: relative;
 }
 
-/* Zrnitý overlay (pôvodné opacity 0.4) */
+/* Zrnitý overlay (pôvodné opacity 0.2) */
 body::before {
     content: '';
     position: absolute;
@@ -47,15 +45,55 @@ body::before {
     width: 100%;
     height: 100%;
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAMAAABl+v1SAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZQTFRFzsvM+/f3///+t7zDgoKCKysqAAAAf4iY3wAAAAxJَع]eNpiYGBgAAADAAAABQANrJqQAAAAAElFTkSuQmCC'); 
-    opacity: 0.4;
+    opacity: 0.2;
     pointer-events: none;
     z-index: 1000;
 }
 
+
 /* 2. HEADER & NAVIGATION */
-/* Zabezpečenie responzivity pre 4 položky v nav */
+header {
+    text-align: center;
+    padding: 40px 20px;
+    border-bottom: 4px double var(--color-burnt-brown);
+    background: white;
+    position: relative;
+    z-index: 1001;
+}
+
+.brand-text-logo {
+    font-family: 'Beach Vibes', cursive;
+    font-size: 3.5rem;
+    color: var(--color-burnt-brown);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    letter-spacing: 0;
+    transition: color 0.3s;
+}
+
+.brand-text-logo:hover {
+    color: var(--color-faded-teak);
+}
+
+.logo-symbol {
+    height: 3.5rem;
+    width: auto;
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+.brand-text-logo:hover .logo-symbol {
+    transform: rotate(5deg) scale(1.05);
+}
+
+nav {
+    margin-top: 20px;
+}
+
 nav a {
-    margin: 0 10px; /* Zmenšený margin pre 4 položky */
+    margin: 0 15px; /* Pôvodný margin pre 3 položky */
     text-decoration: none;
     color: var(--color-text-dark);
     font-weight: bold;
@@ -65,40 +103,85 @@ nav a {
     transition: 0.3s;
 }
 
-/* Media Query pre stabilné rozloženie na mobiloch */
-@media (max-width: 600px) {
-    .brand-text-logo {
-        font-size: 2.5rem; 
-        margin-bottom: 5px;
-    }
-    .logo-symbol {
-        height: 2.5rem;
-    }
-    nav {
-        display: flex;
-        flex-wrap: wrap; 
-        justify-content: center;
-    }
-    nav a {
-        margin: 5px 8px;
-        font-size: 0.9rem;
-    }
-    .container {
-        padding: 30px 15px;
-    }
+nav a:hover {
+    color: var(--color-faded-teak);
+    border-bottom: 2px dashed var(--color-faded-teak);
 }
 
+/* 3. LAYOUT */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 1001;
+}
 
-/* ... (Zvyšok CSS je rovnaký ako v stabilnej verzii) ... */
+/* 4. BUTTONS */
+.btn {
+    display: inline-block;
+    background-color: var(--color-burnt-brown);
+    color: white;
+    padding: 15px 35px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 25px;
+    border-radius: 50px;
+    transition: 0.3s;
+    border: 2px solid var(--color-burnt-brown);
+}
+
+.btn:hover {
+    background-color: transparent;
+    color: var(--color-burnt-brown);
+    box-shadow: 0px 0px 15px rgba(130, 69, 56, 0.4);
+}
 
 /* 5. PORTFOLIO GRID */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
 .item {
     border: 1px solid var(--color-text-dark);
     padding: 15px;
     background: white;
     box-shadow: 8px 8px 0px var(--color-text-dark);
     transition: 0.3s;
+    /* Pôvodné hranaté rohy */
     border-radius: 0; 
     clip-path: none; 
 }
-/* ... (atď.) ... */
+
+.item:hover {
+    transform: translateY(-5px);
+    box-shadow: 12px 12px 0px var(--color-faded-teak);
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+    filter: sepia(30%) contrast(110%);
+}
+
+/* 6. FOOTER */
+footer {
+    text-align: center;
+    padding: 40px;
+    font-size: 0.8rem;
+    margin-top: 60px;
+    background-color: var(--color-text-dark);
+    color: var(--color-vintage-cream);
+    position: relative;
+    z-index: 1001;
+}
+
+/* Kontakt (Pôvodné hranaté rohy) */
+.container > div:has(p strong) {
+    border-radius: 0; 
+    clip-path: none;
+}
