@@ -59,7 +59,7 @@ function setByPath(obj, path, value) {
     let cursor = obj;
     for (let i = 0; i < chunks.length - 1; i += 1) {
         const key = chunks[i];
-        if (key === "__proto__" || key === "prototype" || key === "constructor") {
+        if (BLOCKED_KEYS.has(key)) {
             return;
         }
         if (!cursor[key] || typeof cursor[key] !== "object") {
@@ -68,7 +68,7 @@ function setByPath(obj, path, value) {
         cursor = cursor[key];
     }
     const leafKey = chunks[chunks.length - 1];
-    if (leafKey === "__proto__" || leafKey === "prototype" || leafKey === "constructor") {
+    if (BLOCKED_KEYS.has(leafKey)) {
         return;
     }
     cursor[leafKey] = value;
@@ -165,10 +165,11 @@ function productTemplate(product, index) {
 }
 
 function buildProductsFields(content) {
-    productsFieldsRoot.innerHTML = "";
+    let htmlOutput = "";
     content.products.forEach((product, index) => {
-        productsFieldsRoot.innerHTML += productTemplate(product, index);
+        htmlOutput += productTemplate(product, index);
     });
+    productsFieldsRoot.innerHTML = htmlOutput;
 
     productsFieldsRoot.querySelectorAll("[data-remove-product]").forEach((button) => {
         button.addEventListener("click", () => {

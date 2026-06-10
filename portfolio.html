@@ -50,10 +50,10 @@
             .replaceAll('>', '&gt;')
             .replaceAll('"', '&quot;')
             .replaceAll("'", '&#39;');
+        const soldLabel = texts.portfolio.soldLabel || 'SOLD';
+        const productCta = texts.portfolio.productCta || 'I want this';
         let htmlOutput = '';
         projectData.forEach(item => {
-            const soldLabel = texts.portfolio.soldLabel || 'SOLD';
-            const productCta = texts.portfolio.productCta || 'I want this';
             htmlOutput += `
                 <div class="item">
                     <div class="img-wrapper" style="position: relative;">
