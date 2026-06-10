@@ -170,7 +170,7 @@ function productTemplate(product, index) {
                 <label class="admin-field" style="grid-column: 1 / -1;">Description<textarea data-product-field="description">${escapeHtml(product.description || "")}</textarea></label>
             </div>
             <div class="admin-actions">
-                <button type="button" class="admin-btn secondary" data-remove-product="${Number(index)}">Remove Product</button>
+                <button type="button" class="admin-btn secondary" data-remove-product="${index}">Remove Product</button>
             </div>
         </div>
     `;
@@ -186,6 +186,9 @@ function buildProductsFields(content) {
     productsFieldsRoot.querySelectorAll("[data-remove-product]").forEach((button) => {
         button.addEventListener("click", () => {
             const idx = Number(button.dataset.removeProduct);
+            if (!Number.isInteger(idx) || idx < 0) {
+                return;
+            }
             const current = window.ReverbThreadsContent.getAll();
             current.products.splice(idx, 1);
             window.ReverbThreadsContent.saveAll(current);
