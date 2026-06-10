@@ -50,10 +50,11 @@
             .replaceAll('>', '&gt;')
             .replaceAll('"', '&quot;')
             .replaceAll("'", '&#39;');
+        let htmlOutput = '';
         projectData.forEach(item => {
             const soldLabel = texts.portfolio.soldLabel || 'SOLD';
             const productCta = texts.portfolio.productCta || 'I want this';
-            const html = `
+            htmlOutput += `
                 <div class="item">
                     <div class="img-wrapper" style="position: relative;">
                         <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}">
@@ -65,8 +66,8 @@
                     ${item.status !== 'SOLD' ? `<a href="contact.html" style="font-size: 0.8rem; text-decoration: underline; color: black;">${escapeHtml(productCta)}</a>` : ''}
                 </div>
             `;
-            container.innerHTML += html;
         });
+        container.innerHTML = htmlOutput;
     </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
-const ADMIN_USER = "admin";
-const ADMIN_PASSWORD = "reverb123";
 const ADMIN_SESSION_KEY = "reverbThreadsAdminSession";
+const ADMIN_CREDENTIALS_KEY = "reverbThreadsAdminCredentials";
+const BLOCKED_KEYS = new Set(["__proto__", "prototype", "constructor"]);
 
 const textFieldMap = [
     { key: "nav.home", label: "Nav: Home" },
@@ -46,16 +46,53 @@ function deepClone(value) {
 }
 
 function getByPath(obj, path) {
-    return path.split(".").reduce((acc, chunk) => (acc ? acc[chunk] : ""), obj);
+    return path.split(".").reduce((acc, chunk) => {
+        if (BLOCKED_KEYS.has(chunk)) {
+            return "";
+        }
+        return acc ? acc[chunk] : "";
+    }, obj);
 }
 
 function setByPath(obj, path, value) {
     const chunks = path.split(".");
+    if (chunks.some((chunk) => BLOCKED_KEYS.has(chunk))) {
+        return;
+    }
     let cursor = obj;
     for (let i = 0; i < chunks.length - 1; i += 1) {
         const key = chunks[i];
         if (!cursor[key] || typeof cursor[key] !== "object") {
             cursor[key] = {};
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#39;");
+        }
+
+        function getCredentials() {
+            try {
+                const stored = localStorage.getItem(ADMIN_CREDENTIALS_KEY);
+                if (!stored) {
+                    return null;
+                }
+                const credentials = JSON.parse(stored);
+                if (!credentials.username || !credentials.password) {
+                    return null;
+                }
+                return credentials;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function saveCredentials(username, password) {
+            localStorage.setItem(ADMIN_CREDENTIALS_KEY, JSON.stringify({ username, password }));
         }
         cursor = cursor[key];
     }
@@ -99,16 +136,16 @@ function productTemplate(product, index) {
     return `
         <div class="product-card" data-product-index="${index}">
             <div class="admin-grid">
-                <label class="admin-field">Title<input data-product-field="title" value="${product.title || ""}"></label>
-                <label class="admin-field">Image URL<input data-product-field="image" value="${product.image || ""}"></label>
-                <label class="admin-field">Price<input data-product-field="price" value="${product.price || ""}"></label>
+                <label class="admin-field">Title<input data-product-field="title" value="${escapeHtml(product.title || "")}"></label>
+                <label class="admin-field">Image URL<input data-product-field="image" value="${escapeHtml(product.image || "")}"></label>
+                <label class="admin-field">Price<input data-product-field="price" value="${escapeHtml(product.price || "")}"></label>
                 <label class="admin-field">Status
                     <select data-product-field="status">
                         <option value="Available" ${product.status === "Available" ? "selected" : ""}>Available</option>
                         <option value="SOLD" ${product.status === "SOLD" ? "selected" : ""}>SOLD</option>
                     </select>
                 </label>
-                <label class="admin-field" style="grid-column: 1 / -1;">Description<textarea data-product-field="description">${product.description || ""}</textarea></label>
+                <label class="admin-field" style="grid-column: 1 / -1;">Description<textarea data-product-field="description">${escapeHtml(product.description || "")}</textarea></label>
             </div>
             <div class="admin-actions">
                 <button type="button" class="admin-btn secondary" data-remove-product="${index}">Remove Product</button>
@@ -173,7 +210,22 @@ function collectFormData() {
 document.getElementById("login-btn").addEventListener("click", () => {
     const username = document.getElementById("login-username").value.trim();
     const password = document.getElementById("login-password").value.trim();
-    if (username === ADMIN_USER && password === ADMIN_PASSWORD) {
+    if (!username || !password) {
+        loginStatus.textContent = "Enter username and password.";
+        return;
+    }
+
+    const credentials = getCredentials();
+    if (!credentials) {
+        saveCredentials(username, password);
+        setLoggedIn(true);
+        loginStatus.textContent = "";
+        showEditor();
+        renderEditor();
+        return;
+    }
+
+    if (username === credentials.username && password === credentials.password) {
         setLoggedIn(true);
         loginStatus.textContent = "";
         showEditor();
@@ -224,4 +276,7 @@ if (isLoggedIn()) {
     renderEditor();
 } else {
     showLogin();
+    if (!getCredentials()) {
+        loginStatus.textContent = "First login sets your admin username and password.";
+    }
 }
