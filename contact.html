@@ -13,47 +13,29 @@
             <img src="assets/logoSymbol.png" alt="Reverb Threads Logo Symbol" class="logo-symbol">
         </a>
         <nav>
-            <a href="index.html" id="nav-home">Home</a>
-            <a href="portfolio.html" id="nav-portfolio">The Stash</a>
-            <a href="about.html" id="nav-about">Story</a>
-            <a href="contact.html" id="nav-contact" style="color: var(--color-burnt-brown);">Signal</a>
+            <a href="index.html">Home</a>
+            <a href="portfolio.html">The Stash</a>
+            <a href="about.html">Story</a>
+            <a href="contact.html" style="color: var(--color-burnt-brown);">Signal</a>
         </nav>
     </header>
 
     <div class="container">
-        <h2 id="contact-title">Send a Signal</h2>
+        <h2>Send a Signal</h2>
         <div style="border: 3px solid var(--color-text-dark); padding: 30px; background: white; margin-top: 20px; box-shadow: 10px 10px 0px var(--color-golden-ochre);">
-            <p id="contact-intro">Interested in a custom piece or have a question about shipping from Trnava?</p>
-            <p><strong id="contact-email-label">Email:</strong><br><span id="contact-email-value">hello@reverbthreads.sk</span></p>
-            <p><strong id="contact-instagram-label">Instagram:</strong><br><span id="contact-instagram-value">@reverb.threads</span></p>
+            <p>Interested in a custom piece or have a question about shipping from Trnava?</p>
+            <p><strong>Email:</strong><br>hello@reverbthreads.sk</p>
+            <p><strong>Instagram:</strong><br>@reverb.threads</p>
             <br>
-            <a href="mailto:hello@reverbthreads.sk" class="btn" id="contact-button">SEND EMAIL</a>
+            <a href="mailto:hello@reverbthreads.sk" class="btn">SEND EMAIL</a>
         </div>
         <div style="margin-top: 50px;">
-            <p id="contact-quote" style="font-size: 0.9rem; font-style: italic;">"Turn on, tune in, drop out... and sew."</p>
+            <p style="font-size: 0.9rem; font-style: italic;">"Turn on, tune in, drop out... and sew."</p>
         </div>
     </div>
 
     <footer>
-        <span id="footer-copy">&copy; 2025 Reverb Threads. Trnava, Slovakia.</span>
+        &copy; 2025 Reverb Threads. Trnava, Slovakia.
     </footer>
-    <script src="content.js"></script>
-    <script>
-        const texts = window.ReverbThreadsContent.getTexts();
-        document.getElementById('nav-home').textContent = texts.nav.home;
-        document.getElementById('nav-portfolio').textContent = texts.nav.portfolio;
-        document.getElementById('nav-about').textContent = texts.nav.about;
-        document.getElementById('nav-contact').textContent = texts.nav.contact;
-        document.getElementById('contact-title').textContent = texts.contact.title;
-        document.getElementById('contact-intro').textContent = texts.contact.intro;
-        document.getElementById('contact-email-label').textContent = texts.contact.emailLabel;
-        document.getElementById('contact-email-value').textContent = texts.contact.emailValue;
-        document.getElementById('contact-instagram-label').textContent = texts.contact.instagramLabel;
-        document.getElementById('contact-instagram-value').textContent = texts.contact.instagramValue;
-        document.getElementById('contact-button').textContent = texts.contact.button;
-        document.getElementById('contact-button').href = `mailto:${texts.contact.emailValue}`;
-        document.getElementById('contact-quote').textContent = texts.contact.quote;
-        document.getElementById('footer-copy').textContent = texts.footer.copyright;
-    </script>
 </body>
 </html>
