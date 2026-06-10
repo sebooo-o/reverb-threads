@@ -56,47 +56,57 @@ function getByPath(obj, path) {
 
 function setByPath(obj, path, value) {
     const chunks = path.split(".");
-    if (chunks.some((chunk) => BLOCKED_KEYS.has(chunk))) {
-        return;
-    }
     let cursor = obj;
     for (let i = 0; i < chunks.length - 1; i += 1) {
         const key = chunks[i];
+        if (key === "__proto__" || key === "prototype" || key === "constructor") {
+            return;
+        }
         if (!cursor[key] || typeof cursor[key] !== "object") {
             cursor[key] = {};
         }
-
-        function escapeHtml(value) {
-            return String(value)
-                .replaceAll("&", "&amp;")
-                .replaceAll("<", "&lt;")
-                .replaceAll(">", "&gt;")
-                .replaceAll('"', "&quot;")
-                .replaceAll("'", "&#39;");
-        }
-
-        function getCredentials() {
-            try {
-                const stored = localStorage.getItem(ADMIN_CREDENTIALS_KEY);
-                if (!stored) {
-                    return null;
-                }
-                const credentials = JSON.parse(stored);
-                if (!credentials.username || !credentials.password) {
-                    return null;
-                }
-                return credentials;
-            } catch (error) {
-                return null;
-            }
-        }
-
-        function saveCredentials(username, password) {
-            localStorage.setItem(ADMIN_CREDENTIALS_KEY, JSON.stringify({ username, password }));
-        }
         cursor = cursor[key];
     }
-    cursor[chunks[chunks.length - 1]] = value;
+    const leafKey = chunks[chunks.length - 1];
+    if (leafKey === "__proto__" || leafKey === "prototype" || leafKey === "constructor") {
+        return;
+    }
+    cursor[leafKey] = value;
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+}
+
+async function hashValue(value) {
+    const buffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+    return Array.from(new Uint8Array(buffer)).map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function getCredentials() {
+    try {
+        const stored = localStorage.getItem(ADMIN_CREDENTIALS_KEY);
+        if (!stored) {
+            return null;
+        }
+        const credentials = JSON.parse(stored);
+        if (!credentials.username || !credentials.passwordHash) {
+            return null;
+        }
+        return credentials;
+    } catch (error) {
+        return null;
+    }
+}
+
+async function saveCredentials(username, password) {
+    const passwordHash = await hashValue(password);
+    localStorage.setItem(ADMIN_CREDENTIALS_KEY, JSON.stringify({ username, passwordHash }));
 }
 
 function setLoggedIn(value) {
@@ -207,7 +217,7 @@ function collectFormData() {
     return next;
 }
 
-document.getElementById("login-btn").addEventListener("click", () => {
+document.getElementById("login-btn").addEventListener("click", async () => {
     const username = document.getElementById("login-username").value.trim();
     const password = document.getElementById("login-password").value.trim();
     if (!username || !password) {
@@ -217,7 +227,7 @@ document.getElementById("login-btn").addEventListener("click", () => {
 
     const credentials = getCredentials();
     if (!credentials) {
-        saveCredentials(username, password);
+        await saveCredentials(username, password);
         setLoggedIn(true);
         loginStatus.textContent = "";
         showEditor();
@@ -225,7 +235,8 @@ document.getElementById("login-btn").addEventListener("click", () => {
         return;
     }
 
-    if (username === credentials.username && password === credentials.password) {
+    const passwordHash = await hashValue(password);
+    if (username === credentials.username && passwordHash === credentials.passwordHash) {
         setLoggedIn(true);
         loginStatus.textContent = "";
         showEditor();
