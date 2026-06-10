@@ -13,38 +13,56 @@
             <img src="assets/logoSymbol.png" alt="Reverb Threads Logo Symbol" class="logo-symbol">
         </a>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="portfolio.html" style="color: var(--color-burnt-brown);">The Stash</a>
-            <a href="about.html">Story</a>
-            <a href="contact.html">Signal</a>
+            <a href="index.html" id="nav-home">Home</a>
+            <a href="portfolio.html" id="nav-portfolio" style="color: var(--color-burnt-brown);">The Stash</a>
+            <a href="about.html" id="nav-about">Story</a>
+            <a href="contact.html" id="nav-contact">Signal</a>
         </nav>
     </header>
 
     <div class="container">
-        <h2>Current Collection</h2>
-        <p>Unique 1-of-1 items sourced from Slovak thrift shops.</p>
+        <h2 id="portfolio-title">Current Collection</h2>
+        <p id="portfolio-intro">Unique 1-of-1 items sourced from Slovak thrift shops.</p>
         <div class="gallery" id="stash-container">
             </div>
     </div>
 
     <footer>
-        &copy; 2025 Reverb Threads. Trnava, Slovakia.
+        <span id="footer-copy">&copy; 2025 Reverb Threads. Trnava, Slovakia.</span>
     </footer>
 
+    <script src="content.js"></script>
     <script src="projects.js"></script>
     <script>
+        const texts = window.ReverbThreadsContent.getTexts();
+        document.getElementById('nav-home').textContent = texts.nav.home;
+        document.getElementById('nav-portfolio').textContent = texts.nav.portfolio;
+        document.getElementById('nav-about').textContent = texts.nav.about;
+        document.getElementById('nav-contact').textContent = texts.nav.contact;
+        document.getElementById('portfolio-title').textContent = texts.portfolio.title;
+        document.getElementById('portfolio-intro').textContent = texts.portfolio.intro;
+        document.getElementById('footer-copy').textContent = texts.footer.copyright;
+
         const container = document.getElementById('stash-container');
+        const escapeHtml = (value) => String(value)
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#39;');
         projectData.forEach(item => {
+            const soldLabel = texts.portfolio.soldLabel || 'SOLD';
+            const productCta = texts.portfolio.productCta || 'I want this';
             const html = `
                 <div class="item">
                     <div class="img-wrapper" style="position: relative;">
-                        <img src="${item.image}" alt="${item.title}">
-                        ${item.status === 'SOLD' ? '<span style="position: absolute; top: 10px; right: 10px; background: black; color: white; padding: 5px; font-weight: bold;">SOLD</span>' : ''}
+                        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}">
+                        ${item.status === 'SOLD' ? `<span style="position: absolute; top: 10px; right: 10px; background: black; color: white; padding: 5px; font-weight: bold;">${escapeHtml(soldLabel)}</span>` : ''}
                     </div>
-                    <h3>${item.title}</h3>
-                    <p>${item.description}</p>
-                    <p style="font-weight: bold; color: var(--color-burnt-brown);">${item.price}</p>
-                    ${item.status !== 'SOLD' ? '<a href="contact.html" style="font-size: 0.8rem; text-decoration: underline; color: black;">I want this</a>' : ''}
+                    <h3>${escapeHtml(item.title)}</h3>
+                    <p>${escapeHtml(item.description)}</p>
+                    <p style="font-weight: bold; color: var(--color-burnt-brown);">${escapeHtml(item.price)}</p>
+                    ${item.status !== 'SOLD' ? `<a href="contact.html" style="font-size: 0.8rem; text-decoration: underline; color: black;">${escapeHtml(productCta)}</a>` : ''}
                 </div>
             `;
             container.innerHTML += html;
