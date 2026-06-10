@@ -54,26 +54,6 @@ function getByPath(obj, path) {
     }, obj);
 }
 
-function setByPath(obj, path, value) {
-    const chunks = path.split(".");
-    let cursor = obj;
-    for (let i = 0; i < chunks.length - 1; i += 1) {
-        const key = chunks[i];
-        if (BLOCKED_KEYS.has(key)) {
-            return;
-        }
-        if (!cursor[key] || typeof cursor[key] !== "object") {
-            cursor[key] = {};
-        }
-        cursor = cursor[key];
-    }
-    const leafKey = chunks[chunks.length - 1];
-    if (BLOCKED_KEYS.has(leafKey)) {
-        return;
-    }
-    cursor[leafKey] = value;
-}
-
 function escapeHtml(value) {
     return String(value)
         .replaceAll("&", "&amp;")
@@ -108,6 +88,38 @@ async function saveCredentials(username, password) {
     const passwordHash = await hashValue(password);
     localStorage.setItem(ADMIN_CREDENTIALS_KEY, JSON.stringify({ username, passwordHash }));
 }
+
+const textFieldSetters = {
+    "nav.home": (texts, value) => { texts.nav.home = value; },
+    "nav.portfolio": (texts, value) => { texts.nav.portfolio = value; },
+    "nav.about": (texts, value) => { texts.nav.about = value; },
+    "nav.contact": (texts, value) => { texts.nav.contact = value; },
+    "home.title": (texts, value) => { texts.home.title = value; },
+    "home.intro": (texts, value) => { texts.home.intro = value; },
+    "home.tagline": (texts, value) => { texts.home.tagline = value; },
+    "home.cta": (texts, value) => { texts.home.cta = value; },
+    "portfolio.title": (texts, value) => { texts.portfolio.title = value; },
+    "portfolio.intro": (texts, value) => { texts.portfolio.intro = value; },
+    "portfolio.soldLabel": (texts, value) => { texts.portfolio.soldLabel = value; },
+    "portfolio.productCta": (texts, value) => { texts.portfolio.productCta = value; },
+    "about.title": (texts, value) => { texts.about.title = value; },
+    "about.highlight": (texts, value) => { texts.about.highlight = value; },
+    "about.section1Title": (texts, value) => { texts.about.section1Title = value; },
+    "about.section1Text": (texts, value) => { texts.about.section1Text = value; },
+    "about.section1Caption": (texts, value) => { texts.about.section1Caption = value; },
+    "about.section2Title": (texts, value) => { texts.about.section2Title = value; },
+    "about.section2Text": (texts, value) => { texts.about.section2Text = value; },
+    "about.section2Caption": (texts, value) => { texts.about.section2Caption = value; },
+    "contact.title": (texts, value) => { texts.contact.title = value; },
+    "contact.intro": (texts, value) => { texts.contact.intro = value; },
+    "contact.emailLabel": (texts, value) => { texts.contact.emailLabel = value; },
+    "contact.emailValue": (texts, value) => { texts.contact.emailValue = value; },
+    "contact.instagramLabel": (texts, value) => { texts.contact.instagramLabel = value; },
+    "contact.instagramValue": (texts, value) => { texts.contact.instagramValue = value; },
+    "contact.button": (texts, value) => { texts.contact.button = value; },
+    "contact.quote": (texts, value) => { texts.contact.quote = value; },
+    "footer.copyright": (texts, value) => { texts.footer.copyright = value; }
+};
 
 function setLoggedIn(value) {
     sessionStorage.setItem(ADMIN_SESSION_KEY, value ? "1" : "0");
@@ -158,7 +170,7 @@ function productTemplate(product, index) {
                 <label class="admin-field" style="grid-column: 1 / -1;">Description<textarea data-product-field="description">${escapeHtml(product.description || "")}</textarea></label>
             </div>
             <div class="admin-actions">
-                <button type="button" class="admin-btn secondary" data-remove-product="${index}">Remove Product</button>
+                <button type="button" class="admin-btn secondary" data-remove-product="${Number(index)}">Remove Product</button>
             </div>
         </div>
     `;
@@ -195,7 +207,10 @@ function collectFormData() {
     next.products = [];
 
     document.querySelectorAll("[data-field-path]").forEach((field) => {
-        setByPath(next.texts, field.dataset.fieldPath, field.value.trim());
+        const setter = textFieldSetters[field.dataset.fieldPath];
+        if (setter) {
+            setter(next.texts, field.value.trim());
+        }
     });
 
     const productCards = productsFieldsRoot.querySelectorAll("[data-product-index]");

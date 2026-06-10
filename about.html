@@ -113,11 +113,10 @@
         const setMultiline = (elementId, value) => {
             const element = document.getElementById(elementId);
             element.innerHTML = '';
-            const lines = value.split('\n').map((line) => line.trim()).filter((line) => line.length > 0);
+            const lines = value.split('\n');
             lines.forEach((line, index) => {
                 element.appendChild(document.createTextNode(line));
                 if (index !== lines.length - 1) {
-                    element.appendChild(document.createElement('br'));
                     element.appendChild(document.createElement('br'));
                 }
             });
